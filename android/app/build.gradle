@@ -61,7 +61,7 @@ android {
     }
 
     dependencies {
-        coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.0.3'
+        coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.1.4'
         //classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         //implementation "org.jetbrains.kotlinx:kotlinx-metadata-jvm:$kotlin_version"
         //classpath 'com.google.gms:google-services:4.4.2'

@@ -8,6 +8,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_maps_flutter_android/google_maps_flutter_android.dart';
 import 'package:google_maps_flutter_platform_interface/google_maps_flutter_platform_interface.dart';
+import 'package:lapuerta2/noti_service.dart';
 
 class UsermapHome extends StatefulWidget {
   const UsermapHome({Key? key}) : super(key: key);
@@ -24,7 +25,7 @@ class _UsermapHomeState extends State<UsermapHome> {
   int _notificationCountGEDpm = 0;
   int _notificationCountCostura = 0;
   int _notificationCountCiudadania = 0;
-    Uint8List? pickedImage;
+  Uint8List? pickedImage;
   final currentUsera = FirebaseAuth.instance.currentUser!;
 
   void _initializeMapRenderer() {
@@ -227,9 +228,7 @@ class _UsermapHomeState extends State<UsermapHome> {
                     return const Text('Something went wrong');
                   }
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Column(children: [
-                      
-                    ]);
+                    return Column(children: []);
                   }
                   Map<String, dynamic> data =
                       snapshot.data!.data() as Map<String, dynamic>;
@@ -320,10 +319,8 @@ class _UsermapHomeState extends State<UsermapHome> {
                                                 constraints: BoxConstraints(
                                                     maxHeight:
                                                         size.width * 0.08,
-                                                    maxWidth:
-                                                        size.width * 0.08,
-                                                    minWidth:
-                                                        size.width * 0.08,
+                                                    maxWidth: size.width * 0.08,
+                                                    minWidth: size.width * 0.08,
                                                     minHeight:
                                                         size.width * 0.08),
                                                 child: Icon(
@@ -461,10 +458,8 @@ class _UsermapHomeState extends State<UsermapHome> {
                                                 constraints: BoxConstraints(
                                                     maxHeight:
                                                         size.width * 0.08,
-                                                    maxWidth:
-                                                        size.width * 0.08,
-                                                    minWidth:
-                                                        size.width * 0.08,
+                                                    maxWidth: size.width * 0.08,
+                                                    minWidth: size.width * 0.08,
                                                     minHeight:
                                                         size.width * 0.08),
                                                 child: Icon(
@@ -603,10 +598,8 @@ class _UsermapHomeState extends State<UsermapHome> {
                                                 constraints: BoxConstraints(
                                                     maxHeight:
                                                         size.width * 0.08,
-                                                    maxWidth:
-                                                        size.width * 0.08,
-                                                    minWidth:
-                                                        size.width * 0.08,
+                                                    maxWidth: size.width * 0.08,
+                                                    minWidth: size.width * 0.08,
                                                     minHeight:
                                                         size.width * 0.08),
                                                 child: Icon(
@@ -745,10 +738,8 @@ class _UsermapHomeState extends State<UsermapHome> {
                                                 constraints: BoxConstraints(
                                                     maxHeight:
                                                         size.width * 0.08,
-                                                    maxWidth:
-                                                        size.width * 0.08,
-                                                    minWidth:
-                                                        size.width * 0.08,
+                                                    maxWidth: size.width * 0.08,
+                                                    minWidth: size.width * 0.08,
                                                     minHeight:
                                                         size.width * 0.08),
                                                 child: Icon(
@@ -825,7 +816,9 @@ class _UsermapHomeState extends State<UsermapHome> {
                                       opacity: 0.6,
                                       image: AssetImage(
                                           'assets/img/Ciudadaniaback.png'),
-                                          colorFilter: ColorFilter.mode(Color.fromARGB(153, 122, 77, 40), BlendMode.color),
+                                      colorFilter: ColorFilter.mode(
+                                          Color.fromARGB(153, 122, 77, 40),
+                                          BlendMode.color),
                                       filterQuality: FilterQuality.low,
                                       fit: BoxFit.fitWidth),
                                   boxShadow: [
@@ -847,7 +840,8 @@ class _UsermapHomeState extends State<UsermapHome> {
                                       padding: const EdgeInsets.all(12),
                                       child: Icon(Icons.folder,
                                           size: size.height * 0.1,
-                                          color: const Color.fromARGB(153, 122, 77, 40)),
+                                          color: const Color.fromARGB(
+                                              153, 122, 77, 40)),
                                     ),
                                     Container(
                                       width: size.width / 1.03 -
@@ -888,10 +882,8 @@ class _UsermapHomeState extends State<UsermapHome> {
                                                 constraints: BoxConstraints(
                                                     maxHeight:
                                                         size.width * 0.08,
-                                                    maxWidth:
-                                                        size.width * 0.08,
-                                                    minWidth:
-                                                        size.width * 0.08,
+                                                    maxWidth: size.width * 0.08,
+                                                    minWidth: size.width * 0.08,
                                                     minHeight:
                                                         size.width * 0.08),
                                                 child: Icon(
@@ -927,6 +919,14 @@ class _UsermapHomeState extends State<UsermapHome> {
                 },
               ),
 
+              ElevatedButton(onPressed: (){
+NotiService().showNotification(
+                                  //id: 0,
+                                  title: 'La Puerta',
+                                  body: 'una vez',
+                                  
+                                );
+              }, child: Text('noti')),
 
               //PARTE DE PROFESORES********************************************
               StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
@@ -956,6 +956,8 @@ class _UsermapHomeState extends State<UsermapHome> {
                             ),
                             GestureDetector(
                               onTap: () {
+                                NotiService().scheduleNotification(title: 'La Puerta', body: "Tines clase de ESL hoy", hour: 17, minute: 12);
+                                
                                 Navigator.pushNamed(context, '/profeESLpm');
                                 setState(() {
                                   _notificationCountESLpm = 0;
@@ -1032,10 +1034,8 @@ class _UsermapHomeState extends State<UsermapHome> {
                                                 constraints: BoxConstraints(
                                                     maxHeight:
                                                         size.width * 0.08,
-                                                    maxWidth:
-                                                        size.width * 0.08,
-                                                    minWidth:
-                                                        size.width * 0.08,
+                                                    maxWidth: size.width * 0.08,
+                                                    minWidth: size.width * 0.08,
                                                     minHeight:
                                                         size.width * 0.08),
                                                 child: Icon(
@@ -1172,10 +1172,8 @@ class _UsermapHomeState extends State<UsermapHome> {
                                                 constraints: BoxConstraints(
                                                     maxHeight:
                                                         size.width * 0.08,
-                                                    maxWidth:
-                                                        size.width * 0.08,
-                                                    minWidth:
-                                                        size.width * 0.08,
+                                                    maxWidth: size.width * 0.08,
+                                                    minWidth: size.width * 0.08,
                                                     minHeight:
                                                         size.width * 0.08),
                                                 child: Icon(
@@ -1313,10 +1311,8 @@ class _UsermapHomeState extends State<UsermapHome> {
                                                 constraints: BoxConstraints(
                                                     maxHeight:
                                                         size.width * 0.08,
-                                                    maxWidth:
-                                                        size.width * 0.08,
-                                                    minWidth:
-                                                        size.width * 0.08,
+                                                    maxWidth: size.width * 0.08,
+                                                    minWidth: size.width * 0.08,
                                                     minHeight:
                                                         size.width * 0.08),
                                                 child: Icon(
@@ -1455,10 +1451,8 @@ class _UsermapHomeState extends State<UsermapHome> {
                                                 constraints: BoxConstraints(
                                                     maxHeight:
                                                         size.width * 0.08,
-                                                    maxWidth:
-                                                        size.width * 0.08,
-                                                    minWidth:
-                                                        size.width * 0.08,
+                                                    maxWidth: size.width * 0.08,
+                                                    minWidth: size.width * 0.08,
                                                     minHeight:
                                                         size.width * 0.08),
                                                 child: Icon(
@@ -1535,7 +1529,9 @@ class _UsermapHomeState extends State<UsermapHome> {
                                       opacity: 0.6,
                                       image: AssetImage(
                                           'assets/img/Ciudadaniaback.png'),
-                                          colorFilter: ColorFilter.mode(Color.fromARGB(153, 122, 77, 40), BlendMode.color),
+                                      colorFilter: ColorFilter.mode(
+                                          Color.fromARGB(153, 122, 77, 40),
+                                          BlendMode.color),
                                       filterQuality: FilterQuality.low,
                                       fit: BoxFit.fitWidth),
                                   boxShadow: [
@@ -1557,7 +1553,8 @@ class _UsermapHomeState extends State<UsermapHome> {
                                       padding: const EdgeInsets.all(12),
                                       child: Icon(Icons.folder,
                                           size: size.height * 0.1,
-                                          color: const Color.fromARGB(153, 122, 77, 40)),
+                                          color: const Color.fromARGB(
+                                              153, 122, 77, 40)),
                                     ),
                                     Container(
                                       width: size.width / 1.03 -
@@ -1598,10 +1595,8 @@ class _UsermapHomeState extends State<UsermapHome> {
                                                 constraints: BoxConstraints(
                                                     maxHeight:
                                                         size.width * 0.08,
-                                                    maxWidth:
-                                                        size.width * 0.08,
-                                                    minWidth:
-                                                        size.width * 0.08,
+                                                    maxWidth: size.width * 0.08,
+                                                    minWidth: size.width * 0.08,
                                                     minHeight:
                                                         size.width * 0.08),
                                                 child: Icon(
@@ -1636,7 +1631,6 @@ class _UsermapHomeState extends State<UsermapHome> {
                   return Container(); // 👈 your valid data here
                 },
               ),
-
 
               //PARTE DE VOLUNTARIO********************************************
 
@@ -1743,10 +1737,8 @@ class _UsermapHomeState extends State<UsermapHome> {
                                                 constraints: BoxConstraints(
                                                     maxHeight:
                                                         size.width * 0.08,
-                                                    maxWidth:
-                                                        size.width * 0.08,
-                                                    minWidth:
-                                                        size.width * 0.08,
+                                                    maxWidth: size.width * 0.08,
+                                                    minWidth: size.width * 0.08,
                                                     minHeight:
                                                         size.width * 0.08),
                                                 child: Icon(
@@ -1884,10 +1876,8 @@ class _UsermapHomeState extends State<UsermapHome> {
                                                 constraints: BoxConstraints(
                                                     maxHeight:
                                                         size.width * 0.08,
-                                                    maxWidth:
-                                                        size.width * 0.08,
-                                                    minWidth:
-                                                        size.width * 0.08,
+                                                    maxWidth: size.width * 0.08,
+                                                    minWidth: size.width * 0.08,
                                                     minHeight:
                                                         size.width * 0.08),
                                                 child: Icon(
@@ -2026,10 +2016,8 @@ class _UsermapHomeState extends State<UsermapHome> {
                                                 constraints: BoxConstraints(
                                                     maxHeight:
                                                         size.width * 0.08,
-                                                    maxWidth:
-                                                        size.width * 0.08,
-                                                    minWidth:
-                                                        size.width * 0.08,
+                                                    maxWidth: size.width * 0.08,
+                                                    minWidth: size.width * 0.08,
                                                     minHeight:
                                                         size.width * 0.08),
                                                 child: Icon(
@@ -2168,10 +2156,8 @@ class _UsermapHomeState extends State<UsermapHome> {
                                                 constraints: BoxConstraints(
                                                     maxHeight:
                                                         size.width * 0.08,
-                                                    maxWidth:
-                                                        size.width * 0.08,
-                                                    minWidth:
-                                                        size.width * 0.08,
+                                                    maxWidth: size.width * 0.08,
+                                                    minWidth: size.width * 0.08,
                                                     minHeight:
                                                         size.width * 0.08),
                                                 child: Icon(
@@ -2248,7 +2234,9 @@ class _UsermapHomeState extends State<UsermapHome> {
                                       opacity: 0.6,
                                       image: AssetImage(
                                           'assets/img/Ciudadaniaback.png'),
-                                          colorFilter: ColorFilter.mode(Color.fromARGB(153, 122, 77, 40), BlendMode.color),
+                                      colorFilter: ColorFilter.mode(
+                                          Color.fromARGB(153, 122, 77, 40),
+                                          BlendMode.color),
                                       filterQuality: FilterQuality.low,
                                       fit: BoxFit.fitWidth),
                                   boxShadow: [
@@ -2270,7 +2258,8 @@ class _UsermapHomeState extends State<UsermapHome> {
                                       padding: const EdgeInsets.all(12),
                                       child: Icon(Icons.folder,
                                           size: size.height * 0.1,
-                                          color: const Color.fromARGB(153, 122, 77, 40)),
+                                          color: const Color.fromARGB(
+                                              153, 122, 77, 40)),
                                     ),
                                     Container(
                                       width: size.width / 1.03 -
@@ -2311,10 +2300,8 @@ class _UsermapHomeState extends State<UsermapHome> {
                                                 constraints: BoxConstraints(
                                                     maxHeight:
                                                         size.width * 0.08,
-                                                    maxWidth:
-                                                        size.width * 0.08,
-                                                    minWidth:
-                                                        size.width * 0.08,
+                                                    maxWidth: size.width * 0.08,
+                                                    minWidth: size.width * 0.08,
                                                     minHeight:
                                                         size.width * 0.08),
                                                 child: Icon(
@@ -2349,7 +2336,6 @@ class _UsermapHomeState extends State<UsermapHome> {
                   return Container(); // 👈 your valid data here
                 },
               ),
-
 
               //PARTE DE STAFF********************************************
               StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
@@ -2455,10 +2441,8 @@ class _UsermapHomeState extends State<UsermapHome> {
                                                 constraints: BoxConstraints(
                                                     maxHeight:
                                                         size.width * 0.08,
-                                                    maxWidth:
-                                                        size.width * 0.08,
-                                                    minWidth:
-                                                        size.width * 0.08,
+                                                    maxWidth: size.width * 0.08,
+                                                    minWidth: size.width * 0.08,
                                                     minHeight:
                                                         size.width * 0.08),
                                                 child: Icon(
@@ -2595,10 +2579,8 @@ class _UsermapHomeState extends State<UsermapHome> {
                                                 constraints: BoxConstraints(
                                                     maxHeight:
                                                         size.width * 0.08,
-                                                    maxWidth:
-                                                        size.width * 0.08,
-                                                    minWidth:
-                                                        size.width * 0.08,
+                                                    maxWidth: size.width * 0.08,
+                                                    minWidth: size.width * 0.08,
                                                     minHeight:
                                                         size.width * 0.08),
                                                 child: Icon(
@@ -2736,10 +2718,8 @@ class _UsermapHomeState extends State<UsermapHome> {
                                                 constraints: BoxConstraints(
                                                     maxHeight:
                                                         size.width * 0.08,
-                                                    maxWidth:
-                                                        size.width * 0.08,
-                                                    minWidth:
-                                                        size.width * 0.08,
+                                                    maxWidth: size.width * 0.08,
+                                                    minWidth: size.width * 0.08,
                                                     minHeight:
                                                         size.width * 0.08),
                                                 child: Icon(
@@ -2878,10 +2858,8 @@ class _UsermapHomeState extends State<UsermapHome> {
                                                 constraints: BoxConstraints(
                                                     maxHeight:
                                                         size.width * 0.08,
-                                                    maxWidth:
-                                                        size.width * 0.08,
-                                                    minWidth:
-                                                        size.width * 0.08,
+                                                    maxWidth: size.width * 0.08,
+                                                    minWidth: size.width * 0.08,
                                                     minHeight:
                                                         size.width * 0.08),
                                                 child: Icon(
@@ -2958,7 +2936,9 @@ class _UsermapHomeState extends State<UsermapHome> {
                                       opacity: 0.6,
                                       image: AssetImage(
                                           'assets/img/Ciudadaniaback.png'),
-                                          colorFilter: ColorFilter.mode(Color.fromARGB(153, 122, 77, 40), BlendMode.color),
+                                      colorFilter: ColorFilter.mode(
+                                          Color.fromARGB(153, 122, 77, 40),
+                                          BlendMode.color),
                                       filterQuality: FilterQuality.low,
                                       fit: BoxFit.fitWidth),
                                   boxShadow: [
@@ -2980,7 +2960,8 @@ class _UsermapHomeState extends State<UsermapHome> {
                                       padding: const EdgeInsets.all(12),
                                       child: Icon(Icons.folder,
                                           size: size.height * 0.1,
-                                          color: const Color.fromARGB(153, 122, 77, 40)),
+                                          color: const Color.fromARGB(
+                                              153, 122, 77, 40)),
                                     ),
                                     Container(
                                       width: size.width / 1.03 -
@@ -3021,10 +3002,8 @@ class _UsermapHomeState extends State<UsermapHome> {
                                                 constraints: BoxConstraints(
                                                     maxHeight:
                                                         size.width * 0.08,
-                                                    maxWidth:
-                                                        size.width * 0.08,
-                                                    minWidth:
-                                                        size.width * 0.08,
+                                                    maxWidth: size.width * 0.08,
+                                                    minWidth: size.width * 0.08,
                                                     minHeight:
                                                         size.width * 0.08),
                                                 child: Icon(
@@ -3059,7 +3038,6 @@ class _UsermapHomeState extends State<UsermapHome> {
                   return Container(); // 👈 your valid data here
                 },
               ),
-
 
               SizedBox(
                 height: size.height * 0.03,
@@ -3109,7 +3087,8 @@ class _UsermapHomeState extends State<UsermapHome> {
           }),
     );
   }
-    Future<void> getProfilePicture() async {
+
+  Future<void> getProfilePicture() async {
     final storageRef = FirebaseStorage.instance.ref();
     final imageRef = storageRef.child(currentUsera.email.toString());
 

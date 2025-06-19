@@ -889,6 +889,10 @@ class _UserhomePrincipalState extends State<UserhomePrincipal> {
                 padding: EdgeInsets.all(size.width * 0.001),
                 child: Column(
                   children: [
+
+                    
+
+
                     StreamBuilder<QuerySnapshot>(
                         stream: feedStream,
                         builder: (BuildContext context,

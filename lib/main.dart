@@ -6,13 +6,14 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:lapuerta2/auth.dart';
 import 'package:lapuerta2/firebase_api.dart';
 import 'package:lapuerta2/mainwrapper.dart';
+import 'package:lapuerta2/noti_service.dart';
 import 'package:lapuerta2/onboarding.dart';
 import 'firebase_options.dart';
 
 final navigatorKey = GlobalKey<NavigatorState>();
 
 Future<void> main() async {
-  
+  NotiService().initNotification();
   WidgetsFlutterBinding.ensureInitialized();
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
